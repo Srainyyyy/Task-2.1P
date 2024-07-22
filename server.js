@@ -13,17 +13,17 @@ const mg = mailgun({ apiKey: process.env.MAILGUN_API_KEY, domain: process.env.MA
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 使用JSON中间件解析请求体
+
 app.use(express.json());
 
-// 设置静态文件夹
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 定义欢迎邮件发送的POST路由
+// POST路由
 app.post('/welcome', (req, res) => {
     const { email } = req.body; // 从请求体中获取email
 
-    // 配置邮件内容
+  
     const data = {
         from: 'no-reply@deakin.edu.au', // 发送方邮箱
         to: email, // 接收方邮箱
@@ -36,10 +36,10 @@ app.post('/welcome', (req, res) => {
     mg.messages().send(data, (error, body) => {
         if (error) {
             console.error('Error:', error);
-            res.status(500).send(`Failed to send email. Error: ${error.message}`); // 邮件发送失败响应
+            res.status(500).send(`Failed to send email. Error: ${error.message}`); // 发送失败
         } else {
             console.log('Body:', body);
-            res.status(200).send('Welcome email sent!'); // 邮件发送成功响应
+            res.status(200).send('Welcome email sent!'); // 发送成功
         }
     });
 });
