@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Welcome Email</title>
+</head>
+<body>
+    <h1>Send Welcome Email</h1>
+    <form id="emailForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="submit">Send Email</button>
+    </form>
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            fetch('/welcome', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
