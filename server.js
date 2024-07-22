@@ -25,7 +25,7 @@ app.post('/welcome', (req, res) => {
 
     // 配置邮件内容
     const data = {
-        from: 'no-reply@sandbox75b59d6609e1417aab93b15fffd4b0cf.mailgun.org', // 发送方邮箱
+        from: 'no-reply@deakin.edu.au', // 发送方邮箱
         to: email, // 接收方邮箱
         subject: 'Welcome to DEV@Deakin!', // 邮件主题
         text: 'Thank you for joining DEV@Deakin!', // 邮件正文（纯文本）
